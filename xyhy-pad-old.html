@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上海欣耀环禹 - 产品展示</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { font-family: 'Noto Sans SC', sans-serif; }
+    .card-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body class="bg-gray-50">
+<div id="app" class="max-w-md mx-auto min-h-screen bg-gray-50"></div>
+
+<script>
+    const { useState } = React;
+
+    // 分类数据
+    const categories = [
+      { id: 'bend', name: '折弯系列', icon: '🏗️', color: 'bg-orange-500' },
+      { id: 'four-post', name: '四柱/停车', icon: '🅿️', color: 'bg-blue-500' },
+      { id: 'scissor', name: '中位剪/摩托', icon: '✂️', color: 'bg-green-500' },
+      { id: 'energy', name: '新能源', icon: '⚡', color: 'bg-yellow-500' },
+      { id: 'in-ground', name: '地藏剪式', icon: '⬇️', color: 'bg-purple-500' },
+      { id: 'ramp', name: '斜坡大剪', icon: '📐', color: 'bg-pink-500' },
+      { id: 'tire', name: '扒胎机', icon: '🔧', color: 'bg-red-500' },
+    ];
+
+    // 公司信息 - 精简为10要点
+    const companyInfo = {
+      name: '上海欣耀环禹汽车维修设备有限公司',
+      nameEn: 'XINYAO UNIVERSAL',
+      tel: '0086-18916695809',
+      email: '1915836250@qq.com',
+      website: 'www.xyhycarlift.com',
+      // 10个要点，每点不超过30字
+      highlights: [
+        '2020年成立，注册资本5000万元',
+        '专业研发生产汽车维修举升机',
+        '厂区9万㎡，智能车间3万㎡',
+        '员工50人，年产3万台',
+        '日产量100台，支持大批量定制',
+        '立柱自动折弯焊接生产线',
+        '配备数控激光切管机、焊接机器人',
+        '自主研发全自动生产线，获国家发明专利',
+        'ISO9001和欧盟CE认证',
+        '远销全球，售后无忧',
+      ],
+      certifications: ['ISO9001', '欧盟CE'],
+    };
+
+    // 产品数据
+    const products = {
+      'bend': [
+        { id: 'S1', name: '六/八/十折弯双柱举升机', en: 'Six/Eight/Ten bend two post lift', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 立柱间距: '2830mm', 举升时间: '50s', 电机功率: '2.2kW', 整机重量: '550kg', 包装尺寸: '2870×480×700mm' }, features: '精密齿轮倾斜安装|全自动焊接生产线|一体成型无焊接|标配防撞胶块托盘|可选3+2支臂|两年质保|适配SUV', unlock: '手动双边/单边、手自一体、全电控', model: 'S/E/T系列' },
+        { id: 'SD', name: '六/八/十折弯龙门举升机', en: 'Six/Eight/Ten bend gantry car lift', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 立柱间距: '2830mm', 举升时间: '50s', 电机功率: '2.2kW', 整机重量: '600kg' }, features: '支持35°安装|链条驱动|顶部限位开关|全自动焊接|一体成型|标配70mm增高套|可选3+2支臂|两年质保', unlock: '手动双边/单边、手自一体、全电控', model: 'SD/ED/TD系列' },
+        { id: 'SD-INV', name: '六/八/十折弯倒置缸龙门举升机', en: 'Six/Eight/Ten bend inverted cylinder gantry', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 立柱间距: '2830mm', 举升时间: '50s', 电机功率: '2.2kW', 整机重量: '605kg' }, features: '可30°侧装|油缸直驱更安全|密封性好不易渗漏|维护便捷|结构美观|顶部限位开关', unlock: '手动单边、手自一体', model: 'SD/ED/TD-倒置缸' },
+        { id: 'S-5.5T', name: '六折弯双柱举升机5.5吨', en: 'Six bend heavy duty two post lift', specs: { 额定举升: '5.5T', 举升高度: '120-1900mm', 整机宽度: '3918mm', 立柱间距: '3300mm', 举升时间: '50s', 电机功率: '3.0kW', 整机重量: '830kg' }, features: '精密齿轮倾斜安装|全自动焊接|一体成型滑台|加固底座|标配3+3支臂|两年质保|适配公交车', unlock: '手动双边、手自一体、全电控', model: 'S-5.5T' },
+      ],
+      'four-post': [
+        { id: 'F10', name: '四柱举升机F10', en: 'Four post lift F10', specs: { 举升重量: '4000kg', 最大高度: '1750mm', 整机尺寸: '5744×3426×2110mm', 立柱间距: '4105mm', 平台长度: '4500mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '垂直升降|手动机械+钢丝绳双重安全|柱内高密度滑块|油管防爆节流阀|防滑花纹板平台|可选移动轮', unlock: '手动', model: 'F10' },
+        { id: 'F20', name: '停车升降机F20', en: 'Parking lift F20', specs: { 举升重量: '4000kg', 最大高度: '2075mm', 整机尺寸: '5262×2880×2476mm', 立柱间距: '3994mm', 平台长度: '4200mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '电机油泵钢丝绳驱动|机械安全锁任意高度锁紧|四角水平可调|油路节流防爆阀|外形美观省空间', unlock: '手动', model: 'F20' },
+      ],
+      'scissor': [
+        { id: 'M14C', name: '中位剪举升机M14C', en: 'Mid-position scissor lift M14C', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台尺寸: '1750×540mm', 额定油压: '24Mpa', 举升时间: '30-50s', 气动压力: '0.6-0.8Mpa', 电机功率: '2.2kW', 重量: '550kg' }, features: '双层防爆油管|多道安全锁齿|加固主轴轨道|四油缸举升强劲|分体结构运输便捷', unlock: '气动/电动可选', model: 'M14C' },
+        { id: 'M16DF', name: '分体中位剪举升机M16DF', en: 'Split mid-position scissor lift M16DF', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台尺寸: '1750×540mm', 额定油压: '24Mpa', 举升时间: '30-50s', 电机功率: '2.2kW', 重量: '550kg' }, features: '1.6米分体四油缸对顶|双层防爆油管|安全锁齿|加固主轴|分体式省空间|侧顶气动锁扣', unlock: '气动', model: 'M16DF' },
+        { id: 'M18', name: '中位剪举升机M18', en: 'Mid-position scissor lift M18', specs: { 举升重量: '3000kg', 举升高度: '110-1250mm', 平台尺寸: '1830×1200mm', 额定油压: '24Mpa', 举升时间: '30-50s', 托臂尺寸: '520×120×110mm', 重量: '495kg' }, features: '气动保险|油缸防锈|升降报警|连轴驱动同步好|停电可手动下降|加厚托臂', unlock: '气动', model: 'M18' },
+        { id: 'M50', name: '摩托车举升机M50', en: 'Motorcycle scissor lift M50', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台尺寸: '2000×800mm', 额定油压: '24Mpa', 举升时间: '30s', 电机功率: '2.2kW', 重量: '260kg' }, features: '加粗油缸|隐藏电机|气动夹具解锁|可选电动控制|加厚管式剪臂', unlock: '气动', model: 'M50' },
+        { id: 'M60', name: '摩托车举升机M60', en: 'Motorcycle scissor lift M60', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台尺寸: '2000×800mm', 额定油压: '24Mpa', 举升时间: '30s', 电机功率: '2.2kW', 重量: '260kg' }, features: '加厚管式剪臂|气动驱动解锁|加粗油缸|可选电动控制', unlock: '气动', model: 'M60' },
+      ],
+      'energy': [
+        { id: 'N80', name: '新能源举升机N80', en: 'New energy lift N80', specs: { 举升��量: '1000kg', 举升高度: '1130-1800mm', 平台尺寸: '1250×800mm', 额定油压: '24Mpa', 电机功率: '2.2kW', 重量: '350kg', 倾斜角度: '6°', 侧滑距离: '20-40mm' }, features: '加厚前臂|倾斜式平台|纯铜电机|万向轮定向轮|双油缸|双层交叉剪臂|适配新能源', unlock: '气动', model: 'N80' },
+        { id: 'N90', name: '新能源举升机N90', en: 'New energy lift N90', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台尺寸: '2000×800mm', 额定油压: '24Mpa', 举升时间: '30s', 电机功率: '2.2kW', 重量: '260kg' }, features: '高密封油缸|实心加大钢轮|双层交叉剪臂|可侧滑|纯铜电机|结构稳固', unlock: '气动', model: 'N90' },
+      ],
+      'in-ground': [
+        { id: 'X100', name: '地藏小剪举升机X100', en: 'In-ground small scissor lift X100', specs: { 举升重量: '3000kg', 举升高度: '350-2150mm', 平台长度: '1460mm', 额定油压: '24Mpa', 举升时间: '30-50s', 重量: '710kg' }, features: '加粗油缸|一体折弯底座|加厚面板|机械锁齿|气动解锁|地藏式省空间', unlock: '气动', model: 'X100' },
+        { id: 'X200', name: '超薄小剪举升机X200', en: 'Ultra thin small scissor lift X200', specs: { 举升重量: '3000kg', 举升高度: '115-1800mm', 平台尺寸: '1495×595mm', 额定油压: '24Mpa', 举升时间: '30-50s', 重量: '750kg' }, features: '双回路油缸|高分子耐磨滑块|加厚实心剪臂|上升助力器|可选电动控制|超薄设计', unlock: '气动/电动', model: 'X200' },
+        { id: 'X1000', name: '地藏子母式大剪X1000', en: 'In-ground big scissor lift X1000', specs: { 举升重量: '4000kg', 举升高度: '340-1700mm', 平台尺寸: '4200/4500×600mm', 额定油压: '24Mpa', 举升时间: '50-60s', 重量: '1760-1900kg', 二次举升: '60-450mm' }, features: '机械锁齿|气动解锁|上限位开关|防锈回油|高精度侧滑|加粗高密封油缸', unlock: '气动', model: 'X1000' },
+        { id: 'X2000', name: '地藏超薄子母式大剪X2000', en: 'Ultra thin big scissor lift X2000', specs: { 举升重量: '4000+2500kg', 举升高度: '185-1800mm', 平台尺寸: '4500×620mm', 额定油压: '24Mpa', 举升时间: '50s', 重量: '1200kg', 二次举升: '60-420mm' }, features: '一体实心锁齿|加粗高密封油缸|气动解锁|超薄设计|防锈回油|高精度侧滑', unlock: '气动', model: 'X2000' },
+      ],
+      'ramp': [
+        { id: 'X3000', name: '斜坡大剪举升机X3000', en: 'Ramp alignment big scissor lift X3000', specs: { 举升重量: '4000kg', 举升高度: '1000mm', 平台尺寸: '4500×690mm', 额定油压: '24Mpa', 举升时间: '30-50s', 电机功率: '2.2kW', 重量: '1235kg', 平台间距: '850mm' }, features: '液压系统驱动|优质精钢滚轮|斜坡定位设计|四轮定位专用|结构稳固承载强', unlock: '手动', model: 'X3000' },
+      ],
+      'tire': [
+        { id: 'XY-620B', name: '扒胎机XY-620B', en: 'Tire changer XY-620B', specs: { 外夹范围: '10"-22"', 内夹范围: '12"-24"', 最大轮径: '1040mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '240kg' }, features: '加强型大盘小气缸|立柱箱体一体|欧盟标准气缸|万向大铲|五脚踏|加长六方套|纯铜电机|可选26寸大盘', unlock: '脚踏', model: 'XY-620B' },
+        { id: 'XY-630B', name: '扒胎机XY-630B', en: 'Tire changer XY-630B', specs: { 外夹范围: '10"-22"', 内夹范围: '12"-24"', 最大轮径: '1040mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '240kg' }, features: '加强型大盘小气缸|立柱箱体一体|欧盟标准气缸|万向大铲|五脚踏|加长六方套|纯铜电机|可选26寸大盘', unlock: '脚踏', model: 'XY-630B' },
+        { id: 'XY-660B', name: '扒胎机XY-660B', en: 'Tire changer XY-660B', specs: { 外夹范围: '10"-22"', 内夹范围: '12"-24"', 最��轮径: '1040mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '240kg' }, features: '加强型大盘小气缸|立柱箱体一体|欧盟标准气缸|万向大铲|五脚踏|加长六方套|纯铜电机|可选26寸大盘', unlock: '脚踏', model: 'XY-660B' },
+        { id: 'XY-680B', name: '扒胎机XY-680B', en: 'Tire changer XY-680B', specs: { 外夹范围: '10"-22"', 内夹范围: '12"-24"', 最大轮径: '1040mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '240kg' }, features: '加强型大盘小气缸|立柱箱体一体|欧盟标准气缸|万向大铲|五脚踏|加长六方套|纯铜电机|可选26寸大盘', unlock: '脚踏', model: 'XY-680B' },
+        { id: 'XY-690B', name: '扒胎机XY-690B', en: 'Tire changer XY-690B', specs: { 外夹范围: '10"-22"', 内夹范围: '12"-24"', 最大轮径: '1040mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '240kg' }, features: '加强型大盘小气缸|立柱箱体一体|欧盟标准气缸|万向大铲|五脚踏|加长六方套|纯铜电机|可选26寸大盘', unlock: '脚踏', model: 'XY-690B' },
+        { id: 'XY-6066B', name: '扒胎机XY-6066B', en: 'Tire changer XY-6066B', specs: { 外夹范围: '10"-22"', 内夹范围: '12"-24"', 最大轮径: '1040mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '240kg' }, features: '加强型大盘小气缸|立柱箱体一体|欧盟标准气缸|万向大铲|五脚踏|加长六方套|纯铜电机|可选26寸大盘', unlock: '脚踏', model: 'XY-6066B' },
+        { id: 'XY-6099B', name: '扒胎机XY-6099B', en: 'Tire changer XY-6099B', specs: { 外夹范围: '10"-22"', 内夹范围: '12"-24"', 最大轮径: '1040mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '280kg' }, features: '加强型大盘小气缸|立柱箱体一体|欧盟标准气缸|万向大铲|五脚踏|加长六方套|纯铜电机|可选26寸大盘', unlock: '脚踏', model: 'XY-6099B' },
+        { id: 'XY-8066', name: '扒胎机XY-8066', en: 'Tire changer XY-8066', specs: { 外夹范围: '12"-28"', 最大轮径: '1100mm', 最大轮宽: '3"-15"', 靠胎压力: '2500kg', 噪声: '<70db', 操作压力: '8-10bar', 电机: '220/380V', 重量: '360kg' }, features: '新型免撬系统|180°翻转压胎|中心孔锁紧|标配轮胎举升|双速马达|气动侧摆|一体式机身|可选油水分离器', unlock: '脚踏', model: 'XY-8066' },
+      ],
+    };
+
+    // 首页
+    function Home() {
+      return (
+        <div className="p-4 pb-20">
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 mb-4 text-white card-shadow">
+            <div className="text-xs opacity-80 mb-2">XINYAO UNIVERSAL</div>
+            <h1 className="text-2xl font-bold mb-1">上海欣耀环禹</h1>
+            <div className="text-sm opacity-90">汽车维修设备专家</div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">关于我们</h2>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-orange-50 rounded-xl p-3"><div className="text-2xl font-bold text-orange-600">5000万</div><div className="text-xs text-gray-500">注册资本</div></div>
+              <div className="bg-blue-50 rounded-xl p-3"><div className="text-2xl font-bold text-blue-600">9万㎡</div><div className="text-xs text-gray-500">厂区面积</div></div>
+              <div className="bg-green-50 rounded-xl p-3"><div className="text-2xl font-bold text-green-600">100台</div><div className="text-xs text-gray-500">日产量</div></div>
+              <div className="bg-purple-50 rounded-xl p-3"><div className="text-2xl font-bold text-purple-600">20+</div><div className="text-xs text-gray-500">专利数</div></div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">产品分类</h2>
+            <div className="grid grid-cols-3 gap-3">
+              {categories.map(cat => (
+                <div key={cat.id} className="text-center">
+                  <div className={`w-14 h-14 ${cat.color} rounded-xl flex items-center justify-center text-2xl mx-auto mb-2`}>{cat.icon}</div>
+                  <div className="text-xs text-gray-600">{cat.name}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4 text-center text-xs text-gray-400">
+            <p>电话: {companyInfo.tel}</p>
+            <p>邮箱: {companyInfo.email}</p>
+          </div>
+        </div>
+      );
+    }
+
+    // 公司介绍页 - 10要点
+    function AboutPage() {
+      return (
+        <div className="p-4 pb-20 overflow-y-auto" style={{maxHeight: 'calc(100vh - 60px)'}}>
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 mb-4 text-white card-shadow">
+            <h1 className="text-xl font-bold">公司简介</h1>
+            <p className="text-sm opacity-90 mt-1">Company Profile</p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">上海欣耀环禹</h2>
+            <div className="space-y-2">
+              {companyInfo.highlights.map((item, i) => (
+                <div key={i} className="flex items-start gap-2 p-2 bg-gray-50 rounded-lg">
+                  <span className="w-5 h-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs flex-shrink-0">{i+1}</span>
+                  <span className="text-sm text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">资质认证</h2>
+            <div className="flex gap-2">
+              {companyInfo.certifications.map((cert, i) => (
+                <div key={i} className="bg-green-50 px-4 py-3 rounded-lg text-sm text-green-700 flex-1 text-center font-medium">{cert}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 能力页
+    function CapabilityPage() {
+      return (
+        <div className="p-4 pb-20">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-6 mb-4 text-white card-shadow">
+            <h1 className="text-xl font-bold">核心能力</h1>
+            <p className="text-sm opacity-90 mt-1">Core Capabilities</p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">生产能力</h2>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-orange-50 rounded-xl p-4"><div className="text-2xl font-bold text-orange-600">30000台</div><div className="text-xs text-gray-500">年产</div></div>
+              <div className="bg-blue-50 rounded-xl p-4"><div className="text-2xl font-bold text-blue-600">100台</div><div className="text-xs text-gray-500">日产量</div></div>
+              <div className="bg-green-50 rounded-xl p-4"><div className="text-2xl font-bold text-green-600">50���</div><div className="text-xs text-gray-500">团队</div></div>
+              <div className="bg-purple-50 rounded-xl p-4"><div className="text-2xl font-bold text-purple-600">3万㎡</div><div className="text-xs text-gray-500">智能车间</div></div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">生产设备</h2>
+            {['数控激光切管机', '焊接机器人', '数控对孔钻', '数控激光切板机'].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg mb-2"><span className="text-green-500">✓</span><span className="text-sm">{item}</span></div>
+            ))}
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">生产线</h2>
+            {['立柱自动化折弯焊接', '零部件焊接', '喷涂', '装配'].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg mb-2"><span className="text-green-500">✓</span><span className="text-sm">{item}生产线</span></div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // 专利页
+    function PatentPage() {
+      return (
+        <div className="p-4 pb-20">
+          <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl p-6 mb-4 text-white card-shadow">
+            <h1 className="text-xl font-bold">荣誉专利</h1>
+            <p className="text-sm opacity-90 mt-1">Honorary Patent</p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <div className="flex gap-3 mb-4">
+              <div className="flex-1 bg-red-50 rounded-xl p-4 text-center"><div className="text-3xl font-bold text-red-600">2</div><div className="text-xs text-gray-500">发明专利</div></div>
+              <div className="flex-1 bg-blue-50 rounded-xl p-4 text-center"><div className="text-3xl font-bold text-blue-600">20+</div><div className="text-xs text-gray-500">实用新型</div></div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">发明专利</h2>
+            <div className="p-3 bg-orange-50 rounded-xl">
+              <div className="font-medium text-orange-800">全自动智能化汽车举升机生产线</div>
+              <div className="text-xs text-gray-500 mt-1">国家发明专利，自主研发</div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 card-shadow">
+            <h2 className="text-lg font-semibold mb-3 text-gray-800">技术优势</h2>
+            {['六折弯/八折弯/十折弯结构', '链条/倒置/倒拉油缸配置', '自平衡液压四油缸', '手动/电控解锁系统', '多项达国际先进水平'].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg mb-2"><span className="text-orange-500">★</span><span className="text-sm">{item}</span></div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // 产品分类页
+    function CategoryPage({ categoryId, onProductClick }) {
+      const category = categories.find(c => c.id === categoryId);
+      const categoryProducts = products[categoryId] || [];
+
+      return (
+        <div className="p-4 pb-20">
+          <div className={`${category.color} rounded-2xl p-6 mb-4 text-white card-shadow`}>
+            <div className="text-3xl mb-2">{category.icon}</div>
+            <h1 className="text-xl font-bold">{category.name}</h1>
+            <p className="text-sm opacity-90 mt-1">{categoryProducts.length} 款产品</p>
+          </div>
+
+          <div className="space-y-3">
+            {categoryProducts.map(product => (
+              <ProductCard key={product.id} product={product} onClick={() => onProductClick(product)} />
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // 产品卡片
+    function ProductCard({ product, onClick }) {
+      return (
+        <div className="bg-white rounded-2xl p-4 card-shadow cursor-pointer hover:scale-[1.01] transition-transform" onClick={onClick}>
+          <div className="flex justify-between items-start mb-2">
+            <div className="flex-1">
+              <div className="text-xs text-gray-400">{product.model}</div>
+              <h3 className="font-semibold text-gray-800">{product.name}</h3>
+              <div className="text-xs text-gray-500">{product.en}</div>
+            </div>
+            <div className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">{product.specs['额定举升'] || product.specs['举升重量'] || product.specs['外夹范围']}</div>
+          </div>
+          <div className="flex flex-wrap gap-1 mt-2">
+            {(product.features || '').split('|').slice(0, 4).map((f, i) => (
+              <span key={i} className="text-xs bg-orange-50 text-orange-600 px-2 py-0.5 rounded">{f}</span>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // 产品详情页 - 2页图片+基础参数+特性
+    function ProductDetailPage({ product, onBack }) {
+      const featureList = (product.features || '').split('|');
+      
+      return (
+        <div className="p-4 pb-20">
+          <button onClick={onBack} className="mb-4 flex items-center gap-2 text-gray-600">
+            <span>←</span> 返回
+          </button>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <div className="text-xs text-gray-400 mb-1">{product.model}</div>
+            <h2 className="text-xl font-bold text-gray-800 mb-1">{product.name}</h2>
+            <div className="text-sm text-gray-500">{product.en}</div>
+          </div>
+
+          {/* 第1页：图片展示 */}
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <div className="text-lg font-semibold mb-3 text-gray-800 border-b pb-2">图1：产品外观</div>
+            <div className="bg-gray-100 rounded-xl h-48 flex items-center justify-center">
+              <div className="text-center text-gray-400">
+                <div className="text-4xl mb-2">📷</div>
+                <div className="text-sm">点击添加产品图片</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <div className="text-lg font-semibold mb-3 text-gray-800 border-b pb-2">图2：细节/应用场景</div>
+            <div className="bg-gray-100 rounded-xl h-48 flex items-center justify-center">
+              <div className="text-center text-gray-400">
+                <div className="text-4xl mb-2">📷</div>
+                <div className="text-sm">点击添加图片</div>
+              </div>
+            </div>
+          </div>
+
+          {/* 基础参数表 */}
+          <div className="bg-white rounded-2xl p-4 mb-4 card-shadow">
+            <h3 className="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">基础参数</h3>
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              {Object.entries(product.specs).map(([key, value]) => (
+                value && (
+                  <div key={key} className="flex justify-between p-2 bg-gray-50 rounded">
+                    <span className="text-gray-500">{key}</span>
+                    <span className="text-gray-800 font-medium">{value}</span>
+                  </div>
+                )
+              ))}
+            </div>
+          </div>
+
+          {/* 特性表 */}
+          <div className="bg-white rounded-2xl p-4 card-shadow">
+            <h3 className="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">产品特性</h3>
+            <div className="space-y-2">
+              {featureList.map((feature, i) => (
+                <div key={i} className="flex items-start gap-2 p-2 bg-gray-50 rounded">
+                  <span className="text-green-500 mt-1">✓</span>
+                  <span className="text-sm text-gray-600">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 主应用
+    function App() {
+      const [activeTab, setActiveTab] = useState('home');
+      const [selectedCategory, setSelectedCategory] = useState(null);
+      const [selectedProduct, setSelectedProduct] = useState(null);
+
+      const tabs = [
+        { id: 'home', label: '首页', icon: '🏠' },
+        { id: 'about', label: '公司', icon: '🏢' },
+        { id: 'capability', label: '能力', icon: '⚙️' },
+        { id: 'patent', label: '专利', icon: '📜' },
+        { id: 'products', label: '产品', icon: '📦' },
+      ];
+
+      const renderContent = () => {
+        if (selectedProduct) {
+          return <ProductDetailPage product={selectedProduct} onBack={() => setSelectedProduct(null)} />;
+        }
+        
+        if (activeTab === 'category' && selectedCategory) {
+          return <CategoryPage categoryId={selectedCategory} onProductClick={setSelectedProduct} />;
+        }
+
+        switch (activeTab) {
+          case 'home': return <Home />;
+          case 'about': return <AboutPage />;
+          case 'capability': return <CapabilityPage />;
+          case 'patent': return <PatentPage />;
+          case 'products':
+            return (
+              <div className="p-4 pb-20">
+                <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-6 mb-4 text-white card-shadow">
+                  <h1 className="text-xl font-bold">产品矩阵</h1>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {categories.map(cat => (
+                    <div 
+                      key={cat.id}
+                      onClick={() => { setSelectedCategory(cat.id); setActiveTab('category'); }}
+                      className={`${cat.color} rounded-xl p-4 text-white cursor-pointer`}
+                    >
+                      <div className="text-2xl mb-1">{cat.icon}</div>
+                      <div className="font-medium">{cat.name}</div>
+                      <div className="text-xs opacity-80">{products[cat.id]?.length || 0} 款</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          default: return <Home />;
+        }
+      };
+
+      return (
+        <div className="max-w-md mx-auto bg-gray-50 min-h-screen">
+          <div className="sticky top-0 bg-white z-10 bottom-nav">
+            <div className="flex">
+              {tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => { setActiveTab(tab.id); setSelectedCategory(null); setSelectedProduct(null); }}
+                  className={`flex-1 py-3 text-xs text-center ${activeTab === tab.id ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-400'}`}
+                >
+                  <div className="text-lg mb-0.5">{tab.icon}</div>
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          {renderContent()}
+        </div>
+      );
+    }
+
+    // ========== VANILLA JS VERSION ==========
+
+// DATA
+const companyInfo = {
+  name: '上海欣耀环禹',
+  tel: '18916695809',
+  highlights: [
+    '2020年成立，注册资本5000万元',
+    '专业研发生产汽车维修举升机',
+    '厂区9万平米，智能车间3万平米',
+    '员工50人，年产3万台',
+    '日产量100台，支持大批量定制',
+    '立柱自动折弯焊接生产线',
+    '配备数控激光切管机、焊接机器人',
+    '自主研发全自动生产线，获国家发明专利',
+    'ISO9001和欧盟CE认证',
+    '远销全球，售后无忧'
+  ]
+};
+
+const categories = [
+  { id: 'bend', name: '折弯系列', icon: '🏗️', color: 'bg-orange-500' },
+  { id: 'four-post', name: '四柱/停车', icon: '🅿️', color: 'bg-blue-500' },
+  { id: 'scissor', name: '中位剪/摩托', icon: '✂️', color: 'bg-green-500' },
+  { id: 'energy', name: '新能源', icon: '⚡', color: 'bg-yellow-500' },
+  { id: 'in-ground', name: '地藏剪式', icon: '⬇️', color: 'bg-purple-500' },
+  { id: 'ramp', name: '斜坡大剪', icon: '📐', color: 'bg-pink-500' },
+  { id: 'tire', name: '扒胎机', icon: '🔧', color: 'bg-red-500' }
+];
+
+const products = {
+  'bend': [
+    { id: 'S1', name: '六/八/十折弯双柱举升机', en: 'Six/Eight/Ten bend two post lift', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '550kg' }, features: '精密齿轮倾斜安装|全自动焊接|一体成型|标配防撞胶块|两年质保|适配SUV', model: 'S/E/T系列' },
+    { id: 'SD', name: '六/八/十折弯龙门举升机', en: 'Six/Eight/Ten bend gantry lift', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '600kg' }, features: '支持35度安装|链条驱动|顶部限位开关|标配70mm增高套|两年质保', model: 'SD系列' },
+    { id: 'SD-INV', name: '六/八/十折弯倒置缸龙门举升机', en: 'Inverted cylinder gantry', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '605kg' }, features: '可30度侧装|油缸直驱|密封性好|结构美观', model: '倒置缸' },
+    { id: 'S-5.5T', name: '六折弯双柱举升机5.5吨', en: 'Heavy duty two post lift', specs: { 额定举升: '5.5T', 举升高度: '120-1900mm', 整机宽度: '3918mm', 举升时间: '50s', 电机功率: '3.0kW', 重量: '830kg' }, features: '精密齿轮|全自动焊接|加固底座|标配3+3支臂|适配公交', model: '5.5T' }
+  ],
+  'four-post': [
+    { id: 'F10', name: '四柱举升机F10', en: 'Four post lift', specs: { 举升重量: '4000kg', 最大高度: '1750mm', 整机尺寸: '5744x3426x2110mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '垂直升降|双重安全|高密度滑块|防爆节流阀|可选移动轮', model: 'F10' },
+    { id: 'F20', name: '停车升降机F20', en: 'Parking lift', specs: { 举升重量: '4000kg', 最大高度: '2075mm', 整机尺寸: '5262x2880x2476mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '电机钢丝绳驱动|任意高度锁紧|四角可调|省空间', model: 'F20' }
+  ],
+  'scissor': [
+    { id: 'M14C', name: '中位剪举升机M14C', en: 'Mid-position scissor lift', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台: '1750x540mm', 举升时间: '30-50s', 重量: '550kg' }, features: '双层防爆油管|多道安全锁|四油缸举升|分体结构', model: 'M14C' },
+    { id: 'M16DF', name: '分体中位剪M16DF', en: 'Split scissor lift', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台: '1750x540mm', 举升时间: '30-50s', 重量: '550kg' }, features: '1.6米四油缸|双层防爆|安全锁|省空间', model: 'M16DF' },
+    { id: 'M18', name: '中位剪举升机M18', en: 'Mid-position scissor lift', specs: { 举升重量: '3000kg', 举升高度: '110-1250mm', 平台: '1830x1200mm', 举升时间: '30-50s', 重量: '495kg' }, features: '气动保险|油缸防锈|升降报警|停电可手动', model: 'M18' },
+    { id: 'M50', name: '摩托车举升机M50', en: 'Motorcycle lift', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 举升时间: '30s', 重量: '260kg' }, features: '加粗油缸|隐藏电机|气动夹具|加厚剪臂', model: 'M50' },
+    { id: 'M60', name: '摩托车举升机M60', en: 'Motorcycle lift', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 举升时间: '30s', 重量: '260kg' }, features: '加厚剪臂|气动驱动|加粗油缸', model: 'M60' }
+  ],
+  'energy': [
+    { id: 'N80', name: '新能源举升机N80', en: 'New energy lift', specs: { 举升重量: '1000kg', 举升高度: '1130-1800mm', 平台: '1250x800mm', 倾斜角度: '6度', 重量: '350kg' }, features: '加厚前臂|倾斜平台|纯铜电机|双油缸|适配新能源', model: 'N80' },
+    { id: 'N90', name: '新能源举升机N90', en: 'New energy lift', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 台面可移动: '是', 重量: '260kg' }, features: '高密封油缸|实心钢轮|双层剪臂|可侧滑', model: 'N90' }
+  ],
+  'in-ground': [
+    { id: 'X100', name: '地藏小剪X100', en: 'In-ground scissor', specs: { 举升重量: '3000kg', 举升高度: '350-2150mm', 平台: '1460mm', 举升时间: '30-50s', 重量: '710kg' }, features: '加粗油缸|一体底座|机械锁|气动解锁|省空间', model: 'X100' },
+    { id: 'X200', name: '超薄小剪X200', en: 'Ultra thin scissor', specs: { 举升重量: '3000kg', 举升高度: '115-1800mm', 平台: '1495x595mm', 举升时间: '30-50s', 重量: '750kg' }, features: '双回路油缸|耐磨滑块|上升助力器|超薄设计', model: 'X200' },
+    { id: 'X1000', name: '地藏子母式大剪X1000', en: 'Big scissor lift', specs: { 举升重量: '4000kg', 举升高度: '340-1700mm', 平台: '4200x600mm', 二次举升: '60-450mm', 重量: '1760kg' }, features: '机械锁|气动解锁|上限位开关|高精度侧滑', model: 'X1000' },
+    { id: 'X2000', name: '地藏超薄大剪X2000', en: 'Ultra thin big', specs: { 举升重量: '4000+2500kg', 举升高度: '185-1800mm', 平台: '4500x620mm', 二次举升: '60-420mm', 重量: '1200kg' }, features: '一体锁齿|气动解锁|超薄设计|高精度', model: 'X2000' }
+  ],
+  'ramp': [
+    { id: 'X3000', name: '斜坡大剪X3000', en: 'Ramp scissor lift', specs: { 举升重量: '4000kg', 举升高度: '1000mm', 平台: '4500x690mm', 平台间距: '850mm', 重量: '1235kg' }, features: '液压驱动|精钢滚轮|斜坡定位|四轮定位专用', model: 'X3000' }
+  ],
+  'tire': [
+    { id: '620B', name: '扒胎机XY-620B', en: 'Tire changer', specs: { 外夹: '10-22寸', 内夹: '12-24寸', 轮径: '1040mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸|箱体一体|欧盟气缸|五脚踏|纯铜电机', model: '620B' },
+    { id: '630B', name: '扒胎机XY-630B', en: 'Tire changer', specs: { 外夹: '10-22寸', 内夹: '12-24寸', 轮径: '1040mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸|箱体一体|欧盟气缸|五脚踏|纯铜电机', model: '630B' },
+    { id: '660B', name: '扒胎机XY-660B', en: 'Tire changer', specs: { 外夹: '10-22寸', 内夹: '12-24寸', 轮径: '1040mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸|箱体一体|欧盟气缸|五脚踏|纯铜电机', model: '660B' },
+    { id: '680B', name: '扒胎机XY-680B', en: 'Tire changer', specs: { 外夹: '10-22寸', 内夹: '12-24寸', 轮径: '1040mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸|箱体一体|欧盟气缸|五脚踏|纯铜电机', model: '680B' },
+    { id: '690B', name: '扒胎机XY-690B', en: 'Tire changer', specs: { 外夹: '10-22寸', 内夹: '12-24寸', 轮径: '1040mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸|箱体一体|欧盟气缸|五脚踏|纯铜电机', model: '690B' },
+    { id: '6066B', name: '扒胎机XY-6066B', en: 'Tire changer', specs: { 外夹: '10-22寸', 内夹: '12-24寸', 轮径: '1040mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸|箱体一体|欧盟气缸|五脚踏|纯铜电机', model: '6066B' },
+    { id: '6099B', name: '扒胎机XY-6099B', en: 'Tire changer', specs: { 外夹: '10-22寸', 内夹: '12-24寸', 轮径: '1040mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '280kg' }, features: '大盘小气缸|箱体一体|欧盟气缸|五脚踏|纯铜电机', model: '6099B' },
+    { id: '8066', name: '扒胎机XY-8066', en: 'Tire changer', specs: { 外夹: '12-28寸', 轮径: '1100mm', 轮宽: '3-15寸', 压力: '2500kg', 噪声: '小于70db', 重量: '360kg' }, features: '新型免撬|180度翻转|中心孔锁|双速马达|一体机身', model: '8066' }
+  ]
+};
+
+// ROUTER
+let state = { page: 'home', category: null, product: null };
+
+function render() {
+  var app = document.getElementById('app');
+  var navTabs = ['home', 'about', 'capability', 'patent', 'products'];
+  var navIcons = { home: '🏠', about: '🏢', capability: '⚙️', patent: '📜', products: '📦' };
+  var navLabels = { home: '首页', about: '公司', capability: '能力', patent: '专利', products: '产品' };
+  
+  var navHtml = '<div class="fixed bottom-0 left-0 right-0 bg-white border-t flex" style="max-width:28rem;margin:0 auto">';
+  for (var i = 0; i < navTabs.length; i++) {
+    var tab = navTabs[i];
+    navHtml += '<button onclick="go(\'' + tab + '\', null, null)" class="flex-1 py-3 text-xs text-center ' + (state.page === tab ? 'text-orange-500' : 'text-gray-400') + '"><div class="text-lg">' + navIcons[tab] + '</div>' + navLabels[tab] + '</button>';
+  }
+  navHtml += '</div>';
+  
+  var content = '';
+  if (state.product) {
+    content = renderProductDetail(state.product);
+  } else if (state.page === 'category' && state.category) {
+    content = renderCategory(state.category);
+  } else if (state.page === 'home') {
+    content = renderHome();
+  } else if (state.page === 'about') {
+    content = renderAbout();
+  } else if (state.page === 'capability') {
+    content = renderCapability();
+  } else if (state.page === 'patent') {
+    content = renderPatent();
+  } else if (state.page === 'products') {
+    content = renderProducts();
+  }
+  
+  app.innerHTML = content + navHtml;
+}
+
+function go(page, category, product) {
+  if (product) { state.product = product; }
+  else { state.product = null; }
+  
+  if (category) {
+    state.page = 'category';
+    state.category = category;
+  } else {
+    state.page = page;
+    state.category = null;
+  }
+  render();
+  window.scrollTo(0, 0);
+}
+
+// PAGES
+function renderHome() {
+  var h = '<div class="p-4 pb-20"><div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 mb-4 text-white card-shadow"><div class="text-xs opacity-80 mb-2">XINYAO UNIVERSAL</div><h1 class="text-2xl font-bold mb-1">' + companyInfo.name + '</h1><div class="text-sm opacity-90">汽车维修设备专家</div></div>';
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><h2 class="text-lg font-semibold mb-3">关于我们</h2><div class="grid grid-cols-2 gap-3"><div class="bg-orange-50 rounded-xl p-3"><div class="text-2xl font-bold text-orange-600">5000万</div><div class="text-xs text-gray-500">注册资本</div></div><div class="bg-blue-50 rounded-xl p-3"><div class="text-2xl font-bold text-blue-600">9万</div><div class="text-xs text-gray-500">厂区</div></div><div class="bg-green-50 rounded-xl p-3"><div class="text-2xl font-bold text-green-600">100台</div><div class="text-xs text-gray-500">日产量</div></div><div class="bg-purple-50 rounded-xl p-3"><div class="text-2xl font-bold text-purple-600">20+</div><div class="text-xs text-gray-500">专利</div></div></div></div>';
+  h += '<div class="bg-white rounded-2xl p-4 card-shadow"><h2 class="text-lg font-semibold mb-3">产品分类</h2><div class="grid grid-cols-3 gap-3">';
+  for (var i = 0; i < categories.length; i++) {
+    var cat = categories[i];
+    h += '<div onclick="go(\'' + cat.id + '\', \'' + cat.id + '\', null)" class="text-center cursor-pointer"><div class="w-14 h-14 ' + cat.color + ' rounded-xl flex items-center justify-center text-2xl mx-auto mb-2">' + cat.icon + '</div><div class="text-xs text-gray-600">' + cat.name + '</div></div>';
+  }
+  h += '</div></div><div class="mt-4 text-center text-xs text-gray-400"><p>电话: ' + companyInfo.tel + '</p></div></div>';
+  return h;
+}
+
+function renderAbout() {
+  var h = '<div class="p-4 pb-20"><div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 mb-4 text-white card-shadow"><h1 class="text-xl font-bold">公司简介</h1></div>';
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow">';
+  for (var i = 0; i < companyInfo.highlights.length; i++) {
+    h += '<div class="flex items-start gap-2 p-2 bg-gray-50 rounded-lg mb-2"><span class="w-5 h-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs flex-shrink-0">' + (i+1) + '</span><span class="text-sm text-gray-700">' + companyInfo.highlights[i] + '</span></div>';
+  }
+  h += '</div><div class="bg-white rounded-2xl p-4 card-shadow"><div class="flex gap-2"><div class="bg-green-50 px-4 py-3 rounded-lg text-sm text-green-700 flex-1 text-center font-medium">ISO9001</div><div class="bg-green-50 px-4 py-3 rounded-lg text-sm text-green-700 flex-1 text-center font-medium">欧盟CE</div></div></div></div>';
+  return h;
+}
+
+function renderCapability() {
+  var h = '<div class="p-4 pb-20"><div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-6 mb-4 text-white card-shadow"><h1 class="text-xl font-bold">核心能力</h1></div>';
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="grid grid-cols-2 gap-3"><div class="bg-orange-50 rounded-xl p-4"><div class="text-2xl font-bold text-orange-600">30000台</div><div class="text-xs text-gray-500">年产</div></div><div class="bg-blue-50 rounded-xl p-4"><div class="text-2xl font-bold text-blue-600">100台</div><div class="text-xs text-gray-500">日产量</div></div><div class="bg-green-50 rounded-xl p-4"><div class="text-2xl font-bold text-green-600">50人</div><div class="text-xs text-gray-500">团队</div></div><div class="bg-purple-50 rounded-xl p-4"><div class="text-2xl font-bold text-purple-600">3万</div><div class="text-xs text-gray-500">车间</div></div></div></div>';
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><h2 class="text-lg font-semibold mb-3">生产设备</h2>';
+  var eq = ['数控激光切管机', '焊接机器人', '数控对孔钻', '数控激光切板机'];
+  for (var i = 0; i < eq.length; i++) { h += '<div class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg mb-2"><span class="text-green-500">✓</span><span class="text-sm">' + eq[i] + '</span></div>'; }
+  h += '</div><div class="bg-white rounded-2xl p-4 card-shadow"><h2 class="text-lg font-semibold mb-3">生产线</h2>';
+  var lines = ['立柱自动化折弯焊接', '零部件焊接', '喷涂', '装配'];
+  for (var i = 0; i < lines.length; i++) { h += '<div class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg mb-2"><span class="text-green-500">✓</span><span class="text-sm">' + lines[i] + '生产线</span></div>'; }
+  h += '</div></div>';
+  return h;
+}
+
+function renderPatent() {
+  var h = '<div class="p-4 pb-20"><div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl p-6 mb-4 text-white card-shadow"><h1 class="text-xl font-bold">荣誉专利</h1></div>';
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="flex gap-3 mb-4"><div class="flex-1 bg-red-50 rounded-xl p-4 text-center"><div class="text-3xl font-bold text-red-600">2</div><div class="text-xs text-gray-500">发明专利</div></div><div class="flex-1 bg-blue-50 rounded-xl p-4 text-center"><div class="text-3xl font-bold text-blue-600">20+</div><div class="text-xs text-gray-500">实用新型</div></div></div></div>';
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><h2 class="text-lg font-semibold mb-3">发明专利</h2><div class="p-3 bg-orange-50 rounded-xl"><div class="font-medium text-orange-800">全自动智能化汽车举升机生产线</div><div class="text-xs text-gray-500 mt-1">国家发明专利，自主研发</div></div></div>';
+  h += '<div class="bg-white rounded-2xl p-4 card-shadow"><h2 class="text-lg font-semibold mb-3">技术优势</h2>';
+  var tech = ['六折弯/八折弯/十折弯结构', '链条/倒置/倒拉油缸', '自平衡液压四油缸', '手动/电控解锁系统', '多项达国际先进水平'];
+  for (var i = 0; i < tech.length; i++) { h += '<div class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg mb-2"><span class="text-orange-500">★</span><span class="text-sm">' + tech[i] + '</span></div>'; }
+  h += '</div></div>';
+  return h;
+}
+
+function renderProducts() {
+  var h = '<div class="p-4 pb-20"><div class="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-6 mb-4 text-white card-shadow"><h1 class="text-xl font-bold">产品矩阵</h1></div><div class="grid grid-cols-2 gap-3">';
+  for (var i = 0; i < categories.length; i++) {
+    var cat = categories[i];
+    var count = products[cat.id] ? products[cat.id].length : 0;
+    h += '<div onclick="go(\'' + cat.id + '\', \'' + cat.id + '\', null)" class="' + cat.color + ' rounded-xl p-4 text-white cursor-pointer"><div class="text-2xl mb-1">' + cat.icon + '</div><div class="font-medium">' + cat.name + '</div><div class="text-xs opacity-80">' + count + ' 款</div></div>';
+  }
+  h += '</div></div>';
+  return h;
+}
+
+function renderCategory(categoryId) {
+  var cat = null;
+  for (var i = 0; i < categories.length; i++) { if (categories[i].id === categoryId) { cat = categories[i]; break; } }
+  var prods = products[categoryId] || [];
+  var catNames = { bend: '折弯系列', 'four-post': '四柱/停车', scissor: '中位剪/摩托', energy: '新能源', 'in-ground': '地藏剪式', ramp: '斜坡大剪', tire: '扒胎机' };
+  
+  var h = '<div class="p-4 pb-20"><div class="' + cat.color + ' rounded-2xl p-6 mb-4 text-white card-shadow"><div class="text-3xl mb-2">' + cat.icon + '</div><h1 class="text-xl font-bold">' + catNames[categoryId] + '</h1><p class="text-sm opacity-90 mt-1">' + prods.length + ' 款产品</p></div><div class="space-y-3">';
+  for (var i = 0; i < prods.length; i++) {
+    var p = prods[i];
+    var specKeys = Object.keys(p.specs);
+var firstSpec = p.specs[specKeys[0]];
+    h += '<div onclick="showProductById(\'' + p.id + '\')" class="bg-white rounded-2xl p-4 card-shadow cursor-pointer"><div class="flex justify-between items-start mb-2"><div class="flex-1"><div class="text-xs text-gray-400">' + p.model + '</div><h3 class="font-semibold text-gray-800">' + p.name + '</h3><div class="text-xs text-gray-500">' + p.en + '</div></div><div class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500">' + firstSpec + '</div></div><div class="flex flex-wrap gap-1 mt-2">';
+    var feats = p.features.split('|');
+    for (var j = 0; j < Math.min(4, feats.length); j++) {
+      h += '<span class="text-xs bg-orange-50 text-orange-600 px-2 py-0.5 rounded">' + feats[j] + '</span>';
+    }
+    h += '</div></div>';
+  }
+  h += '</div></div>';
+  return h;
+}
+
+function showProduct(product) {
+  state.product = product;
+  render();
+}
+
+function renderProductDetail(product) {
+  var h = '<div class="p-4 pb-20"><button onclick="goBack()" class="mb-4 flex items-center gap-2 text-gray-600"><span>←</span> 返回</button>';
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="text-xs text-gray-400 mb-1">' + product.model + '</div><h2 class="text-xl font-bold text-gray-800 mb-1">' + product.name + '</h2><div class="text-sm text-gray-500">' + product.en + '</div></div>';
+  
+  // Image 1
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">图1：产品外观</div><div class="bg-gray-100 rounded-xl h-48 flex items-center justify-center"><div class="text-center text-gray-400"><div class="text-4xl mb-2">📷</div><div class="text-sm">点击添加产品图片</div></div></div></div>';
+  
+  // Image 2
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">图2：细节/应用场景</div><div class="bg-gray-100 rounded-xl h-48 flex items-center justify-center"><div class="text-center text-gray-400"><div class="text-4xl mb-2">📷</div><div class="text-sm">点击添加图片</div></div></div></div>';
+  
+  // Specs
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><h3 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">基础参数</h3><div class="grid grid-cols-2 gap-2 text-sm">';
+  var keys = Object.keys(product.specs);
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = product.specs[key];
+    if (val) { h += '<div class="flex justify-between p-2 bg-gray-50 rounded"><span class="text-gray-500">' + key + '</span><span class="text-gray-800 font-medium">' + val + '</span></div>'; }
+  }
+  h += '</div></div>';
+  
+  // Features
+  h += '<div class="bg-white rounded-2xl p-4 card-shadow"><h3 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">产品特性</h3><div class="space-y-2">';
+  var feats = product.features.split('|');
+  for (var i = 0; i < feats.length; i++) {
+    h += '<div class="flex items-start gap-2 p-2 bg-gray-50 rounded"><span class="text-green-500 mt-1">✓</span><span class="text-sm text-gray-600">' + feats[i] + '</span></div>';
+  }
+  h += '</div></div></div>';
+  return h;
+}
+
+function goBack() {
+  state.product = null;
+  render();
+}
+
+function showProductById(id) {
+  for (var catId in products) {
+    var list = products[catId];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id === id) {
+        state.product = list[i];
+        render();
+        return;
+      }
+    }
+  }
+}
+
+// Init
+render();
+</script>
+</body>
+</html>

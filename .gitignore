@@ -1,0 +1,10 @@
+node_modules/
+.gradle/
+build/
+*.apk
+*.ipa
+.DS_Store
+Thumbs.db
+cmdline-tools.zip
+dist/
+*.log

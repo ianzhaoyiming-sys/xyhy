@@ -1,0 +1,12 @@
+{
+  "appId": "com.xyhy.app",
+  "appName": "xyhy-app",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true
+  },
+  "ios": {
+    "minVersion": "12.0"
+  }
+}
