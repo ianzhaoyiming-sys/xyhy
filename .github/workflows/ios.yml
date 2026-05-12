@@ -11,6 +11,11 @@ jobs:
         with:
           node-version: 20
       
+      - name: Install CocoaPods
+        run: |
+          gem install cocoapods -q --no-doc
+          cd ios/App && pod install
+      
       - name: Install dependencies
         run: npm install
       
@@ -20,10 +25,14 @@ jobs:
       - name: Build iOS
         run: |
           cd ios/App
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug -destination 'generic/platform=iOS Simulator' build
+          xcodebuild -workspace App.xcworkspace -scheme App \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            build
         
-      - name: Upload IPA
+      - name: Upload iOS app
         uses: actions/upload-artifact@v4
         with:
           name: ios-app
-          path: ios/App/build/App.ipa
+          path: ios/App/build/Debug-iphonesimulator/*.app
