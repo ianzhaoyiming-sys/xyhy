@@ -1,7 +1,8 @@
 {
   "modelVersion": "2.2.2",
   "minSdkVersion": 9,
-  "compileSdkVersion": 10,
+  "compileSdkVersion": 11,
+  "compatibleSdkVersion": 11,
   "autoSdk": false,
   "configVersion": "3.0.0"
 }

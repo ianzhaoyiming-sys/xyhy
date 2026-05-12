@@ -1,0 +1,14 @@
+{
+  "apiType": "stageMode",
+  "buildOption": {
+    "artifactType": "hap"
+  },
+  "buildOptionSet": [
+    {
+      "name": "release",
+      "arkOptions": {
+        "buildProfile": "release"
+      }
+    }
+  ]
+}
