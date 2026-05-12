@@ -7,4 +7,22 @@ build/
 Thumbs.db
 cmdline-tools.zip
 dist/
-*.logXYHY.pdf
+*.log
+XYHY.pdf
+
+# Image extraction artifacts
+classify_images.py
+extract_images.py
+extracted_images/
+extracted_images_v2/
+harmony/
+xyhy.docx
+xyhy.docx:Zone.Identifier
+
+# Product catalog extras
+xyhy产品图片关联表.xlsx
+xyhy产品目录(含图片).xlsx
+
+# Old files
+xyhy-pad-old.html
+xyhy-pad-cn-en - 副本.html:Zone.Identifier
