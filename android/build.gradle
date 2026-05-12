@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.2'
+        classpath 'com.android.tools.build:gradle:8.4.2'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
         classpath 'com.google.gms:google-services:4.4.2'
 
@@ -27,6 +27,15 @@ allprojects {
             force 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
             force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.22'
             force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22'
+        }
+    }
+    // JDK 17 兼容：禁止编译时使用高于 JDK 17 的源/目标版本
+    afterEvaluate { evaluatedProject ->
+        if (evaluatedProject.hasProperty('compileJava')) {
+            evaluatedProject.compileJava {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
+            }
         }
     }
 }

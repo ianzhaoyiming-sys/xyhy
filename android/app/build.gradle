@@ -3,6 +3,12 @@ apply plugin: 'com.android.application'
 android {
     namespace "com.xyhy.app"
     compileSdk rootProject.ext.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
     defaultConfig {
         applicationId "com.xyhy.app"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -15,10 +21,9 @@ android {
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
-        // 生成universal APK，兼容所有CPU架构
+        // 指定所有CPU架构，确保生成的APK兼容所有设备
         ndk { abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64' }
     }
-    splits { abi { enable true universalApk true } }
     buildTypes {
         release {
             minifyEnabled false
