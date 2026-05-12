@@ -18,7 +18,11 @@ jobs:
         run: npm install
       
       - name: Build web assets
-        run: mkdir -p dist && cp xyhy-pad-cn-en.html dist/index.html && cp xyhy-short1.mp4 dist/
+        run: |
+          mkdir -p dist
+          cp xyhy-pad-cn-en.html dist/index.html
+          cp xyhy-short1.mp4 dist/
+          cp -r extracted_images_v2 dist/
       
       - name: Clear stale pod cache
         run: rm -f ios/App/Podfile.lock
