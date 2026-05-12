@@ -12,9 +12,7 @@ jobs:
           node-version: 20
       
       - name: Install CocoaPods
-        run: |
-          gem install cocoapods -q --no-doc
-          cd ios/App && pod install
+        run: gem install cocoapods -q --no-doc
       
       - name: Install dependencies
         run: npm install
@@ -24,6 +22,9 @@ jobs:
       
       - name: Sync iOS
         run: npx cap sync ios
+      
+      - name: Pod install
+        run: cd ios/App && pod install
       
       - name: Build iOS
         run: |
