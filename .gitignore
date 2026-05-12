@@ -15,7 +15,6 @@ classify_images.py
 extract_images.py
 extracted_images/
 extracted_images_v2/
-harmony/
 xyhy.docx
 xyhy.docx:Zone.Identifier
 
@@ -26,3 +25,4 @@ xyhy产品目录(含图片).xlsx
 # Old files
 xyhy-pad-old.html
 xyhy-pad-cn-en - 副本.html:Zone.Identifier*.keystore
+harmony/
