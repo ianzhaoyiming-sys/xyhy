@@ -1,0 +1,16 @@
+apply plugin: 'com.huawei.ohos.module'
+
+ohos {
+    compileSdkVersion 10
+    defaultConfig {
+        compatibleSdkVersion 10
+    }
+    buildTypes {
+        release {
+            runProguard false
+        }
+    }
+}
+
+dependencies {
+}

@@ -1,0 +1,11 @@
+plugins {
+    id 'com.huawei.ohos.hdc' version '3.2.11.2' apply false
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+        }
+    }
+}

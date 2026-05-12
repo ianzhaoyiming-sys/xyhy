@@ -20,11 +20,11 @@ jobs:
       - name: Build web assets
         run: mkdir -p dist && cp xyhy-pad-cn-en.html dist/index.html && cp xyhy-short1.mp4 dist/
       
+      - name: Clear stale pod cache
+        run: rm -f ios/App/Podfile.lock
+      
       - name: Sync iOS
         run: npx cap sync ios
-      
-      - name: Pod install
-        run: cd ios/App && pod install
       
       - name: Build iOS
         run: |
