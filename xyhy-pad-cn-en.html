@@ -5,10 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <title>上海欣耀环禹 - 产品展示</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { font-family: 'Noto Sans SC', sans-serif; }
     .card-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    /* 基础样式 - CDN加载前保证页面可见 */
+    body { background-color: #f9fafb; margin: 0; padding: 0; }
+    .bg-gray-50 { background-color: #f9fafb; }
+    .text-white { color: #fff; }
+    .text-gray-400 { color: #9ca3af; }
+    .text-gray-500 { color: #6b7280; }
+    .text-gray-600 { color: #4b5563; }
+    .text-gray-700 { color: #374151; }
+    .text-gray-800 { color: #1f2937; }
+    .text-orange-500 { color: #f97316; }
+    .text-orange-600 { color: #ea580c; }
+    .text-orange-800 { color: #9a3412; }
+    .text-green-500 { color: #22c55e; }
+    .text-green-600 { color: #16a34a; }
+    .text-green-700 { color: #15803d; }
+    .text-blue-600 { color: #2563eb; }
+    .text-purple-600 { color: #9333ea; }
+    .text-red-600 { color: #dc2626; }
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .text-3xl { font-size: 1.875rem; }
+    .text-4xl { font-size: 2.25rem; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .rounded { border-radius: 0.25rem; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-2xl { border-radius: 1rem; }
+    .border-b { border-bottom-width: 1px; }
+    .border-t { border-top-width: 1px; }
+    .border-b-2 { border-bottom-width: 2px; }
+    .border-orange-500 { border-color: #f97316; }
+    .bg-white { background-color: #fff; }
+    .bg-orange-50 { background-color: #fff7ed; }
+    .bg-orange-500 { background-color: #f97316; }
+    .bg-orange-600 { background-color: #ea580c; }
+    .bg-blue-500 { background-color: #3b82f6; }
+    .bg-blue-600 { background-color: #2563eb; }
+    .bg-green-50 { background-color: #f0fdf4; }
+    .bg-green-500 { background-color: #22c55e; }
+    .bg-green-600 { background-color: #16a34a; }
+    .bg-yellow-500 { background-color: #eab308; }
+    .bg-purple-500 { background-color: #a855f7; }
+    .bg-purple-600 { background-color: #9333ea; }
+    .bg-pink-500 { background-color: #ec4899; }
+    .bg-red-50 { background-color: #fef2f2; }
+    .bg-red-500 { background-color: #ef4444; }
+    .bg-red-600 { background-color: #dc2626; }
+    .bg-gray-50 { background-color: #f9fafb; }
+    .bg-gray-100 { background-color: #f3f4f6; }
+    .bg-gray-200 { background-color: #e5e7eb; }
+    .p-2 { padding: 0.5rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+    .pb-2 { padding-bottom: 0.5rem; }
+    .pt-16 { padding-top: 4rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .flex { display: flex; }
+    .flex-1 { flex: 1 1 0%; }
+    .flex-shrink-0 { flex-shrink: 0; }
+    .flex-wrap { flex-wrap: wrap; }
+    .items-start { align-items: flex-start; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-1 { gap: 0.25rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .grid { display: grid; }
+    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .w-full { width: 100%; }
+    .w-14 { width: 3.5rem; }
+    .w-16 { width: 4rem; }
+    .w-5 { width: 1.25rem; }
+    .h-5 { height: 1.25rem; }
+    .h-14 { height: 3.5rem; }
+    .h-16 { height: 4rem; }
+    .h-48 { height: 12rem; }
+    .max-h-80 { max-height: 20rem; }
+    .max-w-md { max-width: 28rem; }
+    .object-contain { object-fit: contain; }
+    .object-cover { object-fit: cover; }
+    .opacity-80 { opacity: 0.8; }
+    .opacity-90 { opacity: 0.9; }
+    .cursor-pointer { cursor: pointer; }
+    .overflow-hidden { overflow: hidden; }
+    .border { border-width: 1px; }
+    .border-gray-200 { border-color: #e5e7eb; }
+    .border-white { border-color: #fff; }
+    .fixed { position: fixed; }
+    .top-0 { top: 0; }
+    .left-0 { left: 0; }
+    .right-0 { right: 0; }
+    .z-50 { z-index: 50; }
+    .sticky { position: sticky; }
+    .bottom-0 { bottom: 0; }
+    .min-h-screen { min-height: 100vh; }
+    .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+    .from-orange-500 { --tw-gradient-from: #f97316; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(249, 115, 22, 0)); }
+    .to-orange-600 { --tw-gradient-to: #ea580c; }
+    .from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0)); }
+    .to-blue-600 { --tw-gradient-to: #2563eb; }
+    .from-green-500 { --tw-gradient-from: #22c55e; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(34, 197, 94, 0)); }
+    .to-green-600 { --tw-gradient-to: #16a34a; }
+    .from-purple-500 { --tw-gradient-from: #a855f7; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(168, 85, 247, 0)); }
+    .to-purple-600 { --tw-gradient-to: #9333ea; }
+    .whitespace-nowrap { white-space: nowrap; }
   </style>
 </head>
 <body class="bg-gray-50">
@@ -44,44 +173,44 @@ var categories = [
 
 var products = {
   'bend': [
-    { id: 'S1', name: '六/八/十折弯双柱举升机', en: 'Six/Eight/Ten Bend Two Post Lift', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '550kg' }, features: '精密齿轮倾斜安装/Precision Gear|全自动焊接/Auto Welding|一体成型/One-piece|标配防撞胶块/Anti-collision|两年质保/2-Year Warranty|适配SUV/For SUV', model: 'S/E/T', image: 'extracted_images_v2/img_049_彩色.png' },
-    { id: 'SD', name: '六/八/十折弯龙门举升机', en: 'Six/Eight/Ten Bend Gantry Lift', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '600kg' }, features: '支持35度安装/35° Installation|链条驱动/Chain Drive|顶部限位开关/Limit Switch|标配70mm增高套/70mm Extension|两年质保/2-Year Warranty', model: 'SD', image: 'extracted_images_v2/img_068_彩色.png' },
-    { id: 'SD-INV', name: '六/八/十折弯倒置缸龙门举升机', en: 'Inverted Cylinder Gantry Lift', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '605kg' }, features: '可30度侧装/30° Side Mount|油缸直驱/Direct Cylinder|密封性好/Better Seal|结构美观/Beautiful Design', model: 'Inverted', image: 'extracted_images_v2/img_080_彩色.png' },
-    { id: 'S-5.5T', name: '六折弯双柱举升机5.5吨', en: 'Six Bend Heavy Duty Two Post Lift', specs: { 额定举升: '5.5T', 举升高度: '120-1900mm', 整机宽度: '3918mm', 举升时间: '50s', 电机功率: '3.0kW', 重量: '830kg' }, features: '精密齿轮/Precision Gear|全自动焊接/Auto Welding|加固底座/Reinforced Base|标配3+3支臂/3+3 Arms|For Bus', model: '5.5T', image: 'extracted_images_v2/img_091_彩色.png' }
+    { id: 'S1', name: '六/八/十折弯双柱举升机', en: 'Six/Eight/Ten Bend Two Post Lift', fobPrice: '$795-1324', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '550kg' }, features: '精密齿轮倾斜安装/Precision Gear|全自动焊接/Auto Welding|一体成型/One-piece|标配防撞胶块/Anti-collision|两年质保/2-Year Warranty|适配SUV/For SUV', model: 'S/E/T', image: 'extracted_images_v2/img_049_彩色.png' },
+    { id: 'SD', name: '六/八/十折弯龙门举升机', en: 'Six/Eight/Ten Bend Gantry Lift', fobPrice: '$868-1765', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '600kg' }, features: '支持35度安装/35° Installation|链条驱动/Chain Drive|顶部限位开关/Limit Switch|标配70mm增高套/70mm Extension|两年质保/2-Year Warranty', model: 'SD', image: 'extracted_images_v2/img_068_彩色.png' },
+    { id: 'SD-INV', name: '六/八/十折弯倒置缸龙门举升机', en: 'Inverted Cylinder Gantry Lift', fobPrice: '$956-1030', specs: { 额定举升: '4T', 举升高度: '110-1900mm', 整机宽度: '3392mm', 举升时间: '50s', 电机功率: '2.2kW', 重量: '605kg' }, features: '可30度侧装/30° Side Mount|油缸直驱/Direct Cylinder|密封性好/Better Seal|结构美观/Beautiful Design', model: 'Inverted', image: 'extracted_images_v2/img_080_彩色.png' },
+    { id: 'S-5.5T', name: '六折弯双柱举升机5.5吨', en: 'Six Bend Heavy Duty Two Post Lift', fobPrice: '$1250-1398', specs: { 额定举升: '5.5T', 举升高度: '120-1900mm', 整机宽度: '3918mm', 举升时间: '50s', 电机功率: '3.0kW', 重量: '830kg' }, features: '精密齿轮/Precision Gear|全自动焊接/Auto Welding|加固底座/Reinforced Base|标配3+3支臂/3+3 Arms|For Bus', model: '5.5T', image: 'extracted_images_v2/img_091_彩色.png' }
   ],
   'four-post': [
-    { id: 'F10', name: '四柱举升机F10', en: 'Four Post Lift', specs: { 举升重量: '4000kg', 最大高度: '1750mm', 整机尺寸: '5744x3426x2110mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '垂直升降/Vertical Lift|双重安全/Dual Safety|高密度滑块/High Density Slider|防爆节流阀/Explosion-proof Valve|可选移动轮/Mobile Wheels Optional', model: 'F10', image: 'extracted_images_v2/img_113_彩色.png' },
-    { id: 'F20', name: '停车升降机F20', en: 'Parking Lift', specs: { 举升重量: '4000kg', 最大高度: '2075mm', 整机尺寸: '5262x2880x2476mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '电机钢丝绳驱动/Motor & Wire Rope|任意高度锁紧/Lock at Any Height|四角可调/4-Corner Adjustable|省空间/Space Saving', model: 'F20', image: 'extracted_images_v2/img_113_彩色.png' }
+    { id: 'F10', name: '四柱举升机F10', en: 'Four Post Lift', fobPrice: '$1545-1765', specs: { 举升重量: '4000kg', 最大高度: '1750mm', 整机尺寸: '5744x3426x2110mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '垂直升降/Vertical Lift|双重安全/Dual Safety|高密度滑块/High Density Slider|防爆节流阀/Explosion-proof Valve|可选移动轮/Mobile Wheels Optional', model: 'F10', image: 'extracted_images_v2/img_113_彩色.png' },
+    { id: 'F20', name: '停车升降机F20', en: 'Parking Lift', fobPrice: '$1200', specs: { 举升重量: '4000kg', 最大高度: '2075mm', 整机尺寸: '5262x2880x2476mm', 举升时间: '50s', 电机功率: '2.2kW', 毛重: '1325kg' }, features: '电机钢丝绳驱动/Motor & Wire Rope|任意高度锁紧/Lock at Any Height|四角可调/4-Corner Adjustable|省空间/Space Saving', model: 'F20', image: 'extracted_images_v2/img_113_彩色.png' }
   ],
   'scissor': [
-    { id: 'M14C', name: '中位剪举升机M14C', en: 'Mid-Position Scissor Lift', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台: '1750x540mm', 举升时间: '30-50s', 重量: '550kg' }, features: '双层防爆油管/Double Explosion-proof Tube|多道安全锁/Multi Safety Lock|四油缸举升/4-Cylinder Lift|分体结构/Split Structure', model: 'M14C', image: 'extracted_images_v2/img_121_彩色.png' },
-    { id: 'M16DF', name: '分体中位剪M16DF', en: 'Split Mid-Position Scissor Lift', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台: '1750x540mm', 举升时间: '30-50s', 重量: '550kg' }, features: '1.6米四油缸/1.6m 4-Cylinder|双层防爆/Double Explosion-proof|安全锁/Safety Lock|省空间/Space Saving', model: 'M16DF', image: 'extracted_images_v2/img_122_彩色.png' },
-    { id: 'M18', name: '中位剪举升机M18', en: 'Mid-Position Scissor Lift', specs: { 举升重量: '3000kg', 举升高度: '110-1250mm', 平台: '1830x1200mm', 举升时间: '30-50s', 重量: '495kg' }, features: '气动保险/Pneumatic Safety|油缸防锈/Anti-rust Cylinder|升降报警/Lifting Alarm|停电可手动/Manual Release on Power Off', model: 'M18', image: 'extracted_images_v2/img_134_彩色.png' },
-    { id: 'M50', name: '摩托车举升机M50', en: 'Motorcycle Scissor Lift', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 举升时间: '30s', 重量: '260kg' }, features: '加粗油缸/Heavy Cylinder|隐藏电机/Hidden Motor|气动夹具/Pneumatic Fixture|加厚剪臂/Thickened Arm', model: 'M50', image: 'extracted_images_v2/img_144_彩色.png' },
-    { id: 'M60', name: '摩托车举升机M60', en: 'Motorcycle Scissor Lift', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 举升时间: '30s', 重量: '260kg' }, features: '加厚剪臂/Thickened Arm|气动驱动/Pneumatic Drive|加粗油缸/Heavy Cylinder', model: 'M60', image: 'extracted_images_v2/img_146_彩色.png' }
+    { id: 'M14C', name: '中位剪举升机M14C', en: 'Mid-Position Scissor Lift', fobPrice: '$824-1090', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台: '1750x540mm', 举升时间: '30-50s', 重量: '550kg' }, features: '双层防爆油管/Double Explosion-proof Tube|多道安全锁/Multi Safety Lock|四油缸举升/4-Cylinder Lift|分体结构/Split Structure', model: 'M14C', image: 'extracted_images_v2/img_121_彩色.png' },
+    { id: 'M16DF', name: '分体中位剪M16DF', en: 'Split Mid-Position Scissor Lift', fobPrice: '$1427', specs: { 举升重量: '3000kg', 举升高度: '110-1400mm', 平台: '1750x540mm', 举升时间: '30-50s', 重量: '550kg' }, features: '1.6米四油缸/1.6m 4-Cylinder|双层防爆/Double Explosion-proof|安全锁/Safety Lock|省空间/Space Saving', model: 'M16DF', image: 'extracted_images_v2/img_122_彩色.png' },
+    { id: 'M18', name: '中位剪举升机M18', en: 'Mid-Position Scissor Lift', fobPrice: '$824', specs: { 举升重量: '3000kg', 举升高度: '110-1250mm', 平台: '1830x1200mm', 举升时间: '30-50s', 重量: '495kg' }, features: '气动保险/Pneumatic Safety|油缸防锈/Anti-rust Cylinder|升降报警/Lifting Alarm|停电可手动/Manual Release on Power Off', model: 'M18', image: 'extracted_images_v2/img_134_彩色.png' },
+    { id: 'M50', name: '摩托车举升机M50', en: 'Motorcycle Scissor Lift', fobPrice: '$956', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 举升时间: '30s', 重量: '260kg' }, features: '加粗油缸/Heavy Cylinder|隐藏电机/Hidden Motor|气动夹具/Pneumatic Fixture|加厚剪臂/Thickened Arm', model: 'M50', image: 'extracted_images_v2/img_144_彩色.png' },
+    { id: 'M60', name: '摩托车举升机M60', en: 'Motorcycle Scissor Lift', fobPrice: '$794', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 举升时间: '30s', 重量: '260kg' }, features: '加厚剪臂/Thickened Arm|气动驱动/Pneumatic Drive|加粗油缸/Heavy Cylinder', model: 'M60', image: 'extracted_images_v2/img_146_彩色.png' }
   ],
   'energy': [
-    { id: 'N80', name: '新能源举升机N80', en: 'New Energy Lift', specs: { 举升重量: '1000kg', 举升高度: '1130-1800mm', 平台: '1250x800mm', 倾斜角度: '6度', 重量: '350kg' }, features: '加厚前臂/Thickened Front Arm|倾斜平台/Tilting Platform|纯铜电机/Copper Motor|双油缸/Double Cylinder|适配新能源/For EV', model: 'N80', image: 'extracted_images_v2/img_152_彩色.png' },
-    { id: 'N90', name: '新能源举升机N90', en: 'New Energy Lift', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 台面可移动: '是', 重量: '260kg' }, features: '高密封油缸/High-Seal Cylinder|实心钢轮/Solid Steel Wheel|双层剪臂/Double Layer Arm|可侧滑/Side Sliding', model: 'N90', image: 'extracted_images_v2/img_154_彩色.png' }
+    { id: 'N80', name: '新能源举升机N80', en: 'New Energy Lift', fobPrice: '$824', specs: { 举升重量: '1000kg', 举升高度: '1130-1800mm', 平台: '1250x800mm', 倾斜角度: '6度', 重量: '350kg' }, features: '加厚前臂/Thickened Front Arm|倾斜平台/Tilting Platform|纯铜电机/Copper Motor|双油缸/Double Cylinder|适配新能源/For EV', model: 'N80', image: 'extracted_images_v2/img_152_彩色.png' },
+    { id: 'N90', name: '新能源举升机N90', en: 'New Energy Lift', fobPrice: '$927', specs: { 举升重量: '1000kg', 举升高度: '150-1200mm', 平台: '2000x800mm', 台面可移动: '是', 重量: '260kg' }, features: '高密封油缸/High-Seal Cylinder|实心钢轮/Solid Steel Wheel|双层剪臂/Double Layer Arm|可侧滑/Side Sliding', model: 'N90', image: 'extracted_images_v2/img_154_彩色.png' }
   ],
   'in-ground': [
-    { id: 'X100', name: '地藏小剪X100', en: 'In-Ground Small Scissor', specs: { 举升重量: '3000kg', 举升高度: '350-2150mm', 平台: '1460mm', 举升时间: '30-50s', 重量: '710kg' }, features: '加粗油缸/Heavy Cylinder|一体底座/One-Piece Base|机械锁/Mechanical Lock|气动解锁/Pneumatic Release|省空间/Space Saving', model: 'X100', image: 'extracted_images_v2/img_167_彩色.png' },
-    { id: 'X200', name: '超薄小剪X200', en: 'Ultra Thin Scissor Lift', specs: { 举升重量: '3000kg', 举升高度: '115-1800mm', 平台: '1495x595mm', 举升时间: '30-50s', 重量: '750kg' }, features: '双回路油缸/Double Circuit Cylinder|耐磨滑块/Wear-Resistant Slider|上升助力器/Lift Booster|超薄设计/Ultra Thin Design', model: 'X200', image: 'extracted_images_v2/img_167_彩色.png' },
-    { id: 'X1000', name: '地藏子母式大剪X1000', en: 'In-Ground Big Scissor Lift', specs: { 举升重量: '4000kg', 举升高度: '340-1700mm', 平台: '4200x600mm', 二次举升: '60-450mm', 重量: '1760kg' }, features: '机械锁/Mechanical Lock|气动解锁/Pneumatic Release|上限位开关/Upper Limit Switch|高精度侧滑/High Precision Side Slide', model: 'X1000', image: 'extracted_images_v2/img_183_彩色.png' },
-    { id: 'X2000', name: '地藏超薄大剪X2000', en: 'Ultra Thin Big Scissor Lift', specs: { 举升重量: '4000+2500kg', 举升高度: '185-1800mm', 平台: '4500x620mm', 二次举升: '60-420mm', 重量: '1200kg' }, features: '一体锁齿/One-Piece Lock|气动解锁/Pneumatic Release|超薄设计/Ultra Thin Design|高精度/High Precision', model: 'X2000', image: 'extracted_images_v2/img_183_彩色.png' }
+    { id: 'X100', name: '地藏小剪X100', en: 'In-Ground Small Scissor', fobPrice: '$1412', specs: { 举升重量: '3000kg', 举升高度: '350-2150mm', 平台: '1460mm', 举升时间: '30-50s', 重量: '710kg' }, features: '加粗油缸/Heavy Cylinder|一体底座/One-Piece Base|机械锁/Mechanical Lock|气动解锁/Pneumatic Release|省空间/Space Saving', model: 'X100', image: 'extracted_images_v2/img_167_彩色.png' },
+    { id: 'X200', name: '超薄小剪X200', en: 'Ultra Thin Scissor Lift', fobPrice: '$1662', specs: { 举升重量: '3000kg', 举升高度: '115-1800mm', 平台: '1495x595mm', 举升时间: '30-50s', 重量: '750kg' }, features: '双回路油缸/Double Circuit Cylinder|耐磨滑块/Wear-Resistant Slider|上升助力器/Lift Booster|超薄设计/Ultra Thin Design', model: 'X200', image: 'extracted_images_v2/img_167_彩色.png' },
+    { id: 'X1000', name: '地藏子母式大剪X1000', en: 'In-Ground Big Scissor Lift', fobPrice: '$2853', specs: { 举升重量: '4000kg', 举升高度: '340-1700mm', 平台: '4200x600mm', 二次举升: '60-450mm', 重量: '1760kg' }, features: '机械锁/Mechanical Lock|气动解锁/Pneumatic Release|上限位开关/Upper Limit Switch|高精度侧滑/High Precision Side Slide', model: 'X1000', image: 'extracted_images_v2/img_183_彩色.png' },
+    { id: 'X2000', name: '地藏超薄大剪X2000', en: 'Ultra Thin Big Scissor Lift', fobPrice: '$3397', specs: { 举升重量: '4000+2500kg', 举升高度: '185-1800mm', 平台: '4500x620mm', 二次举升: '60-420mm', 重量: '1200kg' }, features: '一体锁齿/One-Piece Lock|气动解锁/Pneumatic Release|超薄设计/Ultra Thin Design|高精度/High Precision', model: 'X2000', image: 'extracted_images_v2/img_183_彩色.png' }
   ],
   'ramp': [
-    { id: 'X3000', name: '斜坡大剪X3000', en: 'Ramp scissor lift', specs: { 举升重量: '4000kg', 举升高度: '1000mm', 平台: '4500x690mm', 平台间距: '850mm', 重量: '1235kg' }, features: '液压驱动/Hydraulic Drive|精钢滚轮/Steel Rollers|斜坡定位/Ramp Positioning|四轮定位专用/For Wheel Alignment', model: 'X3000', image: 'extracted_images_v2/img_200_彩色.png' }
+    { id: 'X3000', name: '斜坡大剪X3000', en: 'Ramp scissor lift', fobPrice: '$1648-2133', specs: { 举升重量: '4000kg', 举升高度: '1000mm', 平台: '4500x690mm', 平台间距: '850mm', 重量: '1235kg' }, features: '液压驱动/Hydraulic Drive|精钢滚轮/Steel Rollers|斜坡定位/Ramp Positioning|四轮定位专用/For Wheel Alignment', model: 'X3000', image: 'extracted_images_v2/img_200_彩色.png' }
   ],
   'tire': [
-    { id: '620B', name: '扒胎机XY-620B', en: 'Tire changer', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '620B', image: 'extracted_images_v2/img_211_黑白.jpg' },
-    { id: '630B', name: '扒胎机XY-630B', en: 'Tire changer', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '630B', image: 'extracted_images_v2/img_225_黑白.jpg' },
-    { id: '660B', name: '扒胎机XY-660B', en: 'Tire changer', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '660B', image: 'extracted_images_v2/img_229_黑白.jpg' },
-    { id: '680B', name: '扒胎机XY-680B', en: 'Tire changer', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '680B', image: 'extracted_images_v2/img_234_黑白.jpg' },
-    { id: '690B', name: '扒胎机XY-690B', en: 'Tire changer', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '690B', image: 'extracted_images_v2/img_239_黑白.jpg' },
-    { id: '6066B', name: '扒胎机XY-6066B', en: 'Tire changer', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '6066B', image: 'extracted_images_v2/img_247_黑白.jpg' },
-    { id: '6099B', name: '扒胎机XY-6099B', en: 'Tire changer', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '280kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '6099B', image: 'extracted_images_v2/img_251_黑白.jpg' },
-    { id: '8066', name: '扒胎机XY-8066', en: 'Tire changer', specs: { 外夹: '12-28寸/inch', 轮径: '1100mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '360kg' }, features: '新型免撬/New No-Lever|180度翻转/180° Flip|中心孔锁/Center Hole Lock|双速马达/Dual Speed Motor|一体机身/Integrated Body', model: '8066', image: 'extracted_images_v2/img_255_黑白.jpg' }
+    { id: '620B', name: '扒胎机XY-620B', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '620B', image: 'extracted_images_v2/img_211_黑白.jpg' },
+    { id: '630B', name: '扒胎机XY-630B', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '630B', image: 'extracted_images_v2/img_225_黑白.jpg' },
+    { id: '660B', name: '扒胎机XY-660B', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '660B', image: 'extracted_images_v2/img_229_黑白.jpg' },
+    { id: '680B', name: '扒胎机XY-680B', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '680B', image: 'extracted_images_v2/img_234_黑白.jpg' },
+    { id: '690B', name: '扒胎机XY-690B', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '690B', image: 'extracted_images_v2/img_239_黑白.jpg' },
+    { id: '6066B', name: '扒胎机XY-6066B', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '240kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '6066B', image: 'extracted_images_v2/img_247_黑白.jpg' },
+    { id: '6099B', name: '扒胎机XY-6099B', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '10-22寸/inch', 内夹: '12-24寸/inch', 轮径: '1040mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '280kg' }, features: '大盘小气缸/Big Disk Small Cylinder|箱体一体/Integrated Body|欧盟气缸/EU Cylinder|五脚踏/5 Pedals|纯铜电机/Copper Motor', model: '6099B', image: 'extracted_images_v2/img_251_黑白.jpg' },
+    { id: '8066', name: '扒胎机XY-8066', en: 'Tire changer', fobPrice: '询价/Inquiry', specs: { 外夹: '12-28寸/inch', 轮径: '1100mm', 轮宽: '3-15寸/inch', 压力: '2500kg', 噪声: '小于70db', 重量: '360kg' }, features: '新型免撬/New No-Lever|180度翻转/180° Flip|中心孔锁/Center Hole Lock|双速马达/Dual Speed Motor|一体机身/Integrated Body', model: '8066', image: 'extracted_images_v2/img_255_黑白.jpg' }
   ]
 };
 
@@ -235,9 +364,10 @@ function renderProductDetail(product) {
   var h = '<div class="p-4"><button onclick="goBack()" class="mb-4 flex items-center gap-2 text-gray-600"><span>←</span> 返回/Back</button>';
   h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="text-xs text-gray-400 mb-1">' + product.model + '</div><h2 class="text-xl font-bold text-gray-800 mb-1">' + product.name + '</h2><div class="text-sm text-gray-500">' + product.en + '</div></div>';
   
+  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="flex items-center justify-between"><div><div class="text-xs text-gray-400">FOB 大连港/FOB DALIAN PORT</div><div class="text-2xl font-bold text-orange-600">' + (product.fobPrice || '询价/Inquiry') + '</div></div><div class="text-right"><div class="text-xs text-gray-400">FOB 大连港交货价</div></div></div></div>';
+  
   var img1Html = product.image ? '<img src="' + product.image + '" class="w-full max-h-80 object-contain rounded-xl bg-gray-50" style="max-width:100%;" />' : '<div class="bg-gray-100 rounded-xl h-48 flex items-center justify-center"><div class="text-center text-gray-400"><div class="text-4xl mb-2">📷</div><div class="text-sm">点击添加产品图片/Click to add product image</div></div></div>';
   h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">图1：产品外观/Product Appearance</div>' + img1Html + '</div>';
-  h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><div class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">图2：细节/应用场景/Details & Application</div><div class="bg-gray-100 rounded-xl h-48 flex items-center justify-center"><div class="text-center text-gray-400"><div class="text-4xl mb-2">📷</div><div class="text-sm">点击添加图片/Click to add image</div></div></div></div>';
   
   h += '<div class="bg-white rounded-2xl p-4 mb-4 card-shadow"><h3 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">基础参数/Basic Parameters</h3><div class="grid grid-cols-2 gap-2 text-sm">';
   var keys = Object.keys(product.specs);
@@ -271,5 +401,6 @@ function goBack() {
 
 render();
 </script>
+<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
